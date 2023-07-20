@@ -22,13 +22,7 @@ To facilitate easy deployment and reproducibility, the project includes a Docker
    ```
 3. Build a docker container from docker Image
    ```
-   docker create -v <current_directory_path>/:/<folder_name:>  --name <container_name>  <Image_ID>
-   ```
-4. Run the Docker Container
-   ```
-   docker exec -i -t 
-   ```
-   ```
+   docker run -it -v <current_directory_path>/:/<folder_name:>  --name <container_name>  <Image_ID>
    cd <folder_name>
    ``` 
 5. Install all the requirements needed
@@ -39,7 +33,5 @@ To facilitate easy deployment and reproducibility, the project includes a Docker
 6. Run either of the commands with input folder container the video input.mp4
    ```
    python3 make_alerts.py -video input.mp4
-   ```
-   ```
    python3 label_video.py -video input.mp4
    ```
