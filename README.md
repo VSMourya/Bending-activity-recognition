@@ -22,7 +22,7 @@ To facilitate easy deployment and reproducibility, the project includes a Docker
    ```
 3. Build a docker container from docker Image
    ```
-   docker run -it -v <current_directory_path>/:/<folder_name:>  --name <container_name>  <Image_ID>
+   docker run -it -v <project_directory_path>/:/<folder_name:>  --name <container_name>  <Image_ID>
    cd <folder_name>
    ``` 
 5. Install all the requirements needed
@@ -30,7 +30,7 @@ To facilitate easy deployment and reproducibility, the project includes a Docker
    pip install -r requirements.txt
    ```
 
-6. Run either of the commands with input folder container the video input.mp4
+6. Run either of the commands with input folder containing the video input.mp4
    ```
    python3 make_alerts.py -video input.mp4
    python3 label_video.py -video input.mp4
