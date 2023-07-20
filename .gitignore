@@ -2,3 +2,4 @@ input/*
 output/*
 alert_vids/*
 *.mp4
+.DS_Store
