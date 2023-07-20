@@ -1,4 +1,4 @@
-# Bending_activity_recognition
+### Introduction
 
 The "Human Activity Recognition" project utilizes the YOLOv8 model for keypoint detection and a Random Forest classifier to recognize the "person_bending" action. The project consists of two pipelines:
 
