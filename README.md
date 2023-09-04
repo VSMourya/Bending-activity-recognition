@@ -1,6 +1,6 @@
 ### Introduction
 
-The "Human Activity Recognition" project utilizes the YOLOv8 model for keypoint detection and a Random Forest classifier to recognize the "person_bending" action. The project consists of two pipelines:
+The "Bending Activity Recognition" project utilizes the YOLOv8 model for keypoint detection and a Random Forest classifier to recognize the "person_bending" action. The project consists of two pipelines:
 
 1."Make_alerts.py" generates real-time alert videos from a live camera feed, saving them in the "alert_vids" folder.
 
