@@ -3,8 +3,6 @@ from torchvision import transforms
 from ultralytics import YOLO
 
 import sys
-sys.path.append('/yolov7_training/yolov7/cipla/')
-
 import joblib
 
 import matplotlib.pyplot as plt
@@ -128,6 +126,13 @@ def get_kps(relative_kps_all):
 
     return relative_kps_new
 
+def change_dims(h,w):
+    
+    height = 32*(h//32) if h%32==0 else 32*(h//32+1)
+    width = 32*(w//32) if w%32==0 else 32*(w//32+1)
+ 
+    return height, width
+
 def check_bending_action_yolov8(frame,frame_count,model_kp,show_img=False):
 
     print("Running frame number ", frame_count)
@@ -138,6 +143,8 @@ def check_bending_action_yolov8(frame,frame_count,model_kp,show_img=False):
     # frame = cv2.resize(frame,(864,480))
     
     height,width,_ = frame.shape
+    
+    height,width = change_dims(height,width)
 
     start = time.time()
     result = model_v8.predict(frame,imgsz=(width,height),conf=config_file.CONF_THRES,iou=config_file.IOU_THRES)
@@ -145,7 +152,7 @@ def check_bending_action_yolov8(frame,frame_count,model_kp,show_img=False):
     
     fps_yolo = 1/(end-start)
     print("FPS_yolo : ",round(fps_yolo,3))
-
+    
     output_mapping = get_kps(result)
 
 

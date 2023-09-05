@@ -3,13 +3,20 @@ from collections import deque
 
 
 class video_cache():
+    
+    def change_dims(self,h,w):
+    
+        height = 32*(h//32) if h%32==0 else 32*(h//32+1)
+        width = 32*(w//32) if w%32==0 else 32*(w//32+1)
+ 
+        return height, width
 
     def update_values(self):
         
         #reset all parameters and release the videowriter
         self.video_creation_started = False
         self.prev_images_loaded = False
-        self.frame_counter = 50
+        self.frame_counter = ((self.vid_fps)*3)-1
         self.counter = 0
         self.already_alert = False
         self.alert=[]
@@ -49,6 +56,8 @@ class video_cache():
         height, width, _ = img.shape
         self.size = (width,height)
         
+        height,width = self.change_dims(height,width)
+        
         if alert:
         
             if self.already_alert:
@@ -76,7 +85,7 @@ class video_cache():
     
     def __init__(self):
         
-        self.vid_fps = 20
+        self.vid_fps = 25
         self.pre_alert_cache = deque(maxlen=(self.vid_fps)*3)
         self.frame_counter = ((self.vid_fps)*3)-1
         self.already_alert = False
