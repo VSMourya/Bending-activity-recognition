@@ -172,7 +172,6 @@ def change_dims(h,w):
     return height, width
 
 
-
 # ARGS PARSER----------------------------------------------------------
 k=0
 parser = argparse.ArgumentParser()
@@ -276,7 +275,9 @@ for idx, video_path in enumerate([args.video]):
                 print("model_2_fps: ",fps_model)
                 print("class names --> ",class_names)
 
-                x,y,w,h = [70,105,350,100]
+                x,y,w,h = [int(HEIGHT//11),int(WIDTH//18),int(WIDTH//5.5),int(HEIGHT//10.8)]
+                
+                print(x,y,w,h)
 
                 if "bending" in class_names:
                     print("=======================================================>> Person bent")
@@ -292,26 +293,25 @@ for idx, video_path in enumerate([args.video]):
 
                 # image = put_text_on_video_hand(frame,class_names,fps1,frame_count)
             # Write the FPS on the current frame.
-
+            
             end1 = time.time()
             
             overall_fps = 1/(end1-start1)
             print("Overall fps: ",overall_fps)
             
-            frame = cv2.putText(frame, f"{overall_fps:.2f} FPS", (x,y) , cv2.FONT_HERSHEY_SIMPLEX,
+            frame = cv2.rectangle(frame,(x,y+WIDTH//2),(x+int(WIDTH//5.5),y+int(HEIGHT//10.8)),(0,0,255),-1)
+            frame = cv2.putText(frame, f"{overall_fps:.2f} FPS", (x,y+WIDTH//2) , cv2.FONT_HERSHEY_SIMPLEX,
                         1, (0, 255, 0), 2)
-            
             
             # Add fps to total fps.
             total_fps += overall_fps
+            frame_count += 1
             
             print(" ")
             print(" ")
 
             out.write(frame)
             
-            frame_count += 1
-
             # Press `q` to exit.
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break

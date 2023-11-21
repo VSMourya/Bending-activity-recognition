@@ -1,37 +1,54 @@
-### Introduction
+# Bending Activity Recognition
 
-The "Bending Activity Recognition" project utilizes the YOLOv8 model for keypoint detection and a Random Forest classifier to recognize the "person_bending" action. The project consists of two pipelines:
+## Introduction
+"Bending Activity Recognition" is an innovative project leveraging YOLOv8 model for keypoint detection and a Random Forest classifier. Detecting bending actions is crucial in critical environments, including pharmaceuticals, to ensure safety and hygiene, prevent contamination risks, and maintain adherence to strict operational protocols.
 
-1."Make_alerts.py" generates real-time alert videos from a live camera feed, saving them in the "alert_vids" folder.
+## System Requirements
+- Python 3.8 or above
+- Required Python libraries (see `requirements.txt`)
+- Docker (optional for containerized deployment)
 
-2."Label_video.py" labels a given video for the specific bending action. The input video is taken from the "input" folder, and the labelled video is saved in the "output" folder.
-
-To provide context in the alert videos, a personal cache is implemented, which stores multiple frames before generating the alert. This ensures that the final alert video includes a few seconds of frames before the action occurs.
-
-To facilitate easy deployment and reproducibility, the project includes a Dockerfile to create a Docker image. Running the project inside a Docker container ensures consistent and isolated execution of the code.
-
-### Installation
-
-1. Clone the repo
+## Installation Steps
+1. Clone the repository to your local machine:
    ```sh
    git clone https://github.com/VSMourya/Bending_activity_recognition.git
    ```
-2. Create a Docker image using the below command
-   ```
-   Docker build -t <image_name>:<tag_name> .
-   ```
-3. Build a docker container from docker Image
-   ```
-   docker run -it -v <project_directory_path>/:/<folder_name:>  --name <container_name>  <Image_ID>
-   cd <folder_name>
-   ``` 
-5. Install all the requirements needed
-   ```
+2. Install the required Python libraries:
+   ```sh
    pip install -r requirements.txt
    ```
 
-6. Run either of the commands with input folder containing the video input.mp4
+## Running the Project
+1. Navigate to the cloned project directory.
+2. Run the desired script for alert generation or video labeling:
+   - For real-time alert generation:
+     ```sh
+     python3 make_alerts.py -video input.mp4
+     ```
+   - For labeling videos:
+     ```sh
+     python3 label_video.py -video input.mp4
+     ```
+
+## Files Description
+- `make_alerts.py`: Generates real-time alert videos for bending actions.
+- `label_video.py`: Labels bending actions in videos.
+- `caches.py`: Manages a cache system for storing frames prior to an alert.
+- `utilities.py`: Provides utility functions for the project.
+- `config_file.py`: Contains configuration settings for the project.
+- `Dockerfile`: Instructions for building a Docker image.
+
+## Docker Setup (Optional)
+For Docker users, follow these steps to build and run the project in a container:
+1. Build the Docker image:
+   ```sh
+   docker build -t bending-activity-recognition .
    ```
-   python3 make_alerts.py -video input.mp4
-   python3 label_video.py -video input.mp4
+2. Run the Docker container:
+   ```sh
+   docker run -it --name bending-activity-recognition bending-activity-recognition
    ```
+
+## Additional Information
+- The project uses the YOLOv8 model for precise keypoint detection, and a Random Forest classifier for the recognition of bending actions.
+- Ensure the video input follows the specified format for optimal results.
